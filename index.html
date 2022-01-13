@@ -3,29 +3,34 @@
   <body>
     <div id="root"></div>
   </body>
-  <script crossorigin src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
-  <script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react@17/umd/react.production.min.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
     const root = document.getElementById("root");
-    const h3 = React.createElement(
-      "h3", 
-      {
-        id: "title",
-        onMouseEnter: () => console.log("mouse enter")
-      }, 
-      "Hello I'm a span!"
-    );
-    const btn = React.createElement(
-      "button", 
-      {
-        onClick: () => console.log("I'm clicked!"),
-        style: {
-          backgroundColor: "powderblue"
-        }
-      }, 
-      "Click me"
-    );
-    const container = React.createElement("div", null, [h3, btn]);
-    ReactDOM.render(container, root);
+
+    const App = () => {
+      // const는 재선언, 재할당 불가능한 변수, let은 재할당만 가능
+      const [counter, setCounter] = React.useState(0);
+      // data = [0, f] >> [초기값, 값 변경/리렌더링까지 해주는 함수]
+      const onClick = () => {
+        setCounter(counter + 1);
+      };
+      return (
+        <div>
+          <h3>Total clicks: {counter}</h3>
+          <button onClick={onClick}>Click me</button>
+        </div>
+      );
+      // 컴포넌트 첫 글자는 반드시 대문자!!! JSX 규칙임 ex. <Title />, <Button />
+    };
+
+    ReactDOM.render(<App />, root);
   </script>
 </html>
