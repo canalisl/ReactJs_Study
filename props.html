@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <div id="root"></div>
+  </body>
+  <script
+    crossorigin
+    src="https://unpkg.com/react@17/umd/react.production.min.js"
+  ></script>
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"
+  ></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function Btn({ text, onClick }) {
+      console.log(text, "was rendered");
+      return (
+        <button
+          onClick={onClick}
+          style={{
+            backgroundColor: "powderblue",
+            color: "red",
+            padding: "10px 20px",
+            border: 0,
+            borderRadius: 10,
+            // fontSize: big ? 22 : 12,
+          }}
+        >
+          {text}
+        </button>
+      );
+    }
+    const MemorizedBtn = React.memo(Btn);
+    // props가 바뀌지 않는 component는 rerender되지 않도록 하는 memorize 기능
+    // 앱 속도가 느려지는 현상 방지
+    function App() {
+      const [value, setValue] = React.useState("Save Changes");
+      const changeValue = () => {
+        setValue("Revert Changes");
+      };
+      return (
+        <div>
+          <MemorizedBtn text={value} onClick={changeValue} />
+          <MemorizedBtn text="Continue" />
+        </div>
+      );
+      // 컴포넌트에 들어가는 onClick은 EventListener가 아닌 props임!!!!
+      // ex. <Btn text={value} onClick={changeValue} />
+      // 소문자로 시작하는 HTML 태그에 들어가는 onClick은 EventListener 맞음!!
+      // ex. <button onClick={~}></button>
+    }
+
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
+</html>

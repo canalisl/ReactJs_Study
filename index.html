@@ -19,9 +19,15 @@
       // const는 재선언, 재할당 불가능한 변수, let은 재할당만 가능
       const [counter, setCounter] = React.useState(0);
       // data = [0, f] >> [초기값, 값 변경/리렌더링까지 해주는 함수]
+      // modifier함수 f를 이용해 state를 바꿀 때, 바뀐 state값을 갖고 component가 rerender됨
+      // 그 때, 페이지의 모든 요소가 그런 것이 아니고 "바뀐 부분만" 새로고침 됨
       const onClick = () => {
-        setCounter(counter + 1);
+        // setCounter(counter + 1);
+        // 현재의 state값으로 state값을 변경하는 더 안전한 방법
+        setCounter((current) => current + 1);
       };
+      console.log("rendered");
+      console.log(counter);
       return (
         <div>
           <h3>Total clicks: {counter}</h3>
