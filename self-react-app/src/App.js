@@ -20,7 +20,7 @@ function Hello() {
   return <h1>Hello</h1>;
 }
 
-function App() {
+function TernaryOperator() {
   const [showing, setShowing] = useState(false);
   const onClick = () => setShowing((prev) => !prev);
   return (
@@ -31,7 +31,7 @@ function App() {
   );
 }
 
-function App2() {
+function App() {
   const [counter, setValue] = useState(0);
   const [keyword, setKeyword] = useState("");
   const onClick = () => setValue((current) => current + 1);
